@@ -50,7 +50,7 @@ public class City {
     public Building findHighestBuilding() {
         return buildings.stream().max(Comparator.comparing(Building::getLevels)).orElseThrow();
     }
-
+/*
     public List<Building> findBuildingsByStreet(String street) {
         List<Building> result = new ArrayList<>();
         for (Building building : buildings) {
@@ -60,7 +60,11 @@ public class City {
         }
         return result;
     }
-
+*/
+    public List<Building> findBuildingsByStreet(String street) {
+        return buildings.stream().filter(b -> b.getAddress().getStreet().equals(street)).toList();
+    }
+/*
     public boolean isThereBuildingWithMorePeopleThan(int limit) {
         for (Building building : buildings) {
             if (building.calculateNumberOfPeopleCanFit() > limit) {
@@ -68,6 +72,10 @@ public class City {
             }
         }
         return false;
+    }
+*/
+    public boolean isThereBuildingWithMorePeopleThan(int limit) {
+        return buildings.stream().anyMatch(b -> b.calculateNumberOfPeopleCanFit() > limit);
     }
 
     private long sumOfAreaOfBuildings() {
