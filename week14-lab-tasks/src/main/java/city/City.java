@@ -1,6 +1,7 @@
 package city;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class City {
@@ -32,7 +33,7 @@ public class City {
             throw new IllegalArgumentException("City can't be larger than " + fullArea);
         }
     }
-
+/*
     public Building findHighestBuilding() {
         if (buildings.isEmpty()) {
             return null;
@@ -44,6 +45,10 @@ public class City {
             }
         }
         return highest;
+    }
+*/
+    public Building findHighestBuilding() {
+        return buildings.stream().max(Comparator.comparing(Building::getLevels)).orElseThrow();
     }
 
     public List<Building> findBuildingsByStreet(String street) {
