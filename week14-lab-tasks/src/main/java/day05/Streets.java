@@ -20,7 +20,7 @@ public class Streets {
         try (BufferedReader br = Files.newBufferedReader(path)) {
             String line;
             while ((line = br.readLine()) != null) {
-                String parts[] = line.split(" ");
+                String[] parts = line.split(" ");
                 String street = parts[0];
                 int sold = Integer.parseInt(parts[1]);
                 streetView.putIfAbsent(street, new ArrayList<>());
@@ -38,5 +38,12 @@ public class Streets {
                 .mapToInt(k -> k)
                 .filter(k -> k % 2 == mod)
                 .max().orElse(-mod);
+    }
+
+    // Utcanév alapján kérdezzük le a páros házszámok darabszámát
+    public long numberOfEvenNumbersByStreet(String street) {
+        return streetView.get(street).stream()
+                .filter(k -> k % 2 == 0)
+                .count();
     }
 }
